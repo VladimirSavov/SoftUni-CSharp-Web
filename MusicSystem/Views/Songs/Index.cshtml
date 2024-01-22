@@ -1,0 +1,99 @@
+﻿@* @model IEnumerable<MusicSystem.Entities.Songs>
+
+@{
+    ViewData["Title"] = "Songs";
+}
+
+<h1 class="d-flex justify-content-center fw-bold">Songs</h1>
+
+<p>
+    <a asp-action="Create" class="fw-bold">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                </td>
+                <td>
+                    <form method="post" asp-controller="Songs" asp-action="AddToPlaylist">
+                        <button type="submit" class="text-bg-dark">Add To Playlist</button>
+
+                        <input type="hidden" name="songId" value="@item.Id">
+
+                        <select name="playlistId" asp-items="@ViewBag.listPlaylist"></select>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@
+ @model MusicSystem.ViewModels.Song.IndexVM
+
+@{
+    ViewData["Title"] = "Songs";
+}
+@using MusicSystem.Entities;
+<h1 class="d-flex justify-content-center fw-bold">Songs</h1>
+
+<p>
+    <a asp-action="Create" class="fw-bold">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Duration(in seconds)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td> @item.Title</td>
+                <td> @item.Duration</td>
+                <td>
+                    <a href="/Songs/Details?id=@item.Id"> Details </a>
+                    <a href="/Songs/Delete?id=@item.Id"> Delete </a>
+                </td>
+                <td>
+                    <form method="post" asp-controller="Songs" asp-action="AddToPlaylist">
+                        <button type="submit" class="text-bg-dark">Add To Playlist</button>
+
+                        <input type="hidden" name="songId" value="@item.Id">
+
+                        <select name="playlistId" asp-items="@ViewBag.listPlaylist"></select>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

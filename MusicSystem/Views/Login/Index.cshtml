@@ -1,0 +1,32 @@
+﻿@model MusicSystem.ViewModels.Home.LoginVM;
+@{
+    this.Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+
+<div class="col">
+   <fieldset>
+     <legend> Login</legend>
+       <form method="post" action="/Login/Index">
+            <div class="row">
+        <span style="color:red">@Html.ValidationMessage("authErr")</span>
+              <div class="col">
+                <span style="color:red"> @Html.ValidationMessageFor(m=> m.Username)</span>
+              @Html.LabelFor(m => m.Username)
+              @Html.TextBoxFor(m=>m.Username)
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+          <span style="color:red"> @Html.ValidationMessageFor(m=> m.Password)</span>
+            @Html.LabelFor(m=>m.Password)
+          @Html.PasswordFor(m=>m.Password)
+              </div>
+            </div>
+            <div class="row">
+              <div class="col"> 
+                <input type="submit" value="Login" />
+              </div> 
+            </div>
+       </form>
+   </fieldset>
+</div>

@@ -1,0 +1,26 @@
+﻿@model MusicSystem.ViewModels.Album.IndexVM
+
+@{
+    ViewData["Title"] = "Albums";
+}
+@using MusicSystem.Entities;
+<h1 class="d-flex justify-content-center fw-bold">Albums</h1>
+
+<p>
+    <a asp-action="Create" class="fw-bold">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td> @item.Title</td>
+                <td>
+                    <a href="/Albums/Details?id=@item.Id"> Details </a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

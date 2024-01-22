@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MusicSystem.Entities.PlaylistSong>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    @ViewBag.totalDuration seconds
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Song)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Playlist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeAdded)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Playlist.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeAdded)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
